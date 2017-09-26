@@ -29,9 +29,6 @@
  */
 
 import ARKit
-import UIKit
-import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
   
@@ -46,16 +43,27 @@ class GameViewController: UIViewController {
       if let scene = SKScene(fileNamed: "GameScene") {
         // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill
-        
+
         // Present the scene
-        view.presentScene(scene)
+        sceneView.presentScene(scene)
       }
-      
-      view.ignoresSiblingOrder = true
-      
-      view.showsFPS = true
-      view.showsNodeCount = true
+
+      sceneView.ignoresSiblingOrder = true
+
+      sceneView.showsFPS = true
+      sceneView.showsNodeCount = true
     }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    let configuration = ARWorldTrackingConfiguration()
+    sceneView.session.run(configuration)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    sceneView.session.pause()
   }
   
   override var shouldAutorotate: Bool {
