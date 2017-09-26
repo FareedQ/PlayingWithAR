@@ -97,4 +97,11 @@ extension GameViewController: ARSKViewDelegate {
                           options: [.resetTracking,
                                     .removeExistingAnchors])
   }
+  
+  func view(_ view: ARSKView,
+            nodeFor anchor: ARAnchor) -> SKNode? {
+    let bug = SKSpriteNode(imageNamed: "bug")
+    bug.name = "bug"
+    return bug
+  }
 }
